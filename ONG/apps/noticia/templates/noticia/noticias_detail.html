@@ -1,0 +1,109 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Noticias{% endblock %}
+
+{% block content %}
+
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{% static 'core/img/chicas.jpg' %}');">
+      <div class="container position-relative d-flex flex-column align-items-center">
+
+        <h2>Detalle de Noticia</h2>
+        <ol>
+          <li><a href="index.html">Inicio</a></li>
+          <li>Detalle de noticia</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Details Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row g-5">
+
+          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+
+            <article class="blog-details">
+
+              <div class="post-img">
+                <img src="{{object.imagen.url}}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="title">{{object.titulo}}</h2>
+
+              <div class="meta-top">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">{{object.author}}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">{{noticias.fecha|date:"SHORT_DATE_FORMAT"}}</time></a></li>
+                </ul>
+              </div><!-- End meta top -->
+
+              <div class="content">
+                <p>
+                 {{object.texto}}
+                </p>              
+
+              </div><!-- End post content -->
+
+              <div class="meta-bottom">
+                <i class="bi bi-folder"></i>
+                <ul class="cats">
+                  <li><a href="#">{{object.categoria}}</a></li>
+                </ul>                
+              </div><!-- End meta bottom -->
+
+            </article><!-- End blog post --> 
+              
+             {% if request.user %}
+                <div class="comments">
+                    <h4 class="comments-count">Comentarios</h4>
+                    {% for comment in comentarios %}
+                    <div id="comment-1" class="comment">
+                        <div class="d-flex">
+                            <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
+                                <div>
+                                <h5><a href="">{{ comment.author }}</a></h5>
+                                <time datetime="2020-01-01">{{ comment.fecha }}</time>
+                                <p>
+                                {{ comment.texto }}
+                                </p>
+                                 </div>
+                        </div>
+                    </div><!-- End comment #1 -->             
+                    {% endfor %}
+                    <div class="reply-form">
+                        <h4>Deja tu comentario</h4>
+                        <form method="post">
+                            <div class="row">                  
+                            {% csrf_token %}
+                            {{ form.as_p }}                    
+                            </div>
+                            <button type="submit" class="btn btn-primary"><a href="{% url 'comentario' object.pk %}" style="color: #FFFFFF;">Agregar Comentario</a></button>
+                            
+                        </form>
+
+                    </div>
+                </div><!-- End blog comments --> 
+               {% endif %}  
+
+          </div>
+          
+        </div>
+  
+      </div>
+    </section><!-- End Blog Details Section -->
+
+  </main><!-- End #main -->
+
+  {% endblock %}
+
+
+
+

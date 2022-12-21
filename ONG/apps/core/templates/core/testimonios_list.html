@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero d-flex align-items-center">
+<div class="container">
+  <div class="row">
+    <div class="col-xl-4">
+      <h2 data-aos="fade-up">Fundación EntreNosotras</h2>
+      <blockquote data-aos="fade-up" data-aos-delay="100">
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis cum recusandae eum laboriosam voluptatem repudiandae odio, vel exercitationem officiis provident minima. </p>
+      </blockquote>
+      <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+        <a href="{% url 'nosotras' %}" class="btn-get-started">¡Vamos!</a>
+        <a href="https://www.youtube.com/watch?v=NNVXjn5ExZQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Ver Video</span></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section><!-- End Hero Section -->
+
+<main id="main">
+<!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Testimonios</h2>
+
+        </div>
+
+        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+          {% for testimonio in testimonios %}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  {{testimonio.texto}}
+                </p>
+                <div class="profile mt-auto">
+                  <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                  <h3>{{testimonio.nombre}}</h3>
+                  <h4>{{testimonio.profesion}}</h4>
+                </div>
+              </div>
+            </div><!-- End testimonial item --> {% endfor %}  
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+
+{% endblock %}

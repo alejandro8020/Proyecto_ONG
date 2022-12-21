@@ -1,0 +1,133 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Noticias{% endblock %}
+
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{% static 'core/img/chicas_1.jpg' %}')">
+      <div class="container position-relative d-flex flex-column align-items-center">
+
+        <h2>¿Quienes somos?</h2>
+        <ol>
+          <li><a href="{% url 'home' %}">Inicio</a></li>
+          <li>¿Quienes somos?</li>
+        </ol>
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= About Section 
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4" data-aos="fade-up">
+          <div class="col-lg-4">
+            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-8">
+            <div class="content ps-lg-5">
+              <h3>Voluptatem dignissimos provident quasi</h3>
+              <p>
+                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+              </p>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>======= --><!-- End About Section -->
+
+    <!-- ======= Why Choose Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Fundación EntreNosotras</h2>
+
+        </div>
+
+        <div class="row g-0" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="col-xl-5 img-bg" style="background-image: url('{% static 'core/img/grupo_entrenos.jpg' %}');"></div>
+          <div class="col-xl-7 slides  position-relative">
+
+            <div class="slides-1 swiper">
+              <div class="swiper-wrapper">
+                {% for somos in nosotras %}
+                <div class="swiper-slide">
+                  <div class="item">
+                    <h3 class="mb-3">{{somos.titulo}}</h3>
+                    <h4 class="mb-3">{{somos.contenido|linebreaks}}</h4>
+                    <p>{{somos.texto}}</p>
+                  </div>
+                </div><!-- End slide item --> {% endfor %}                
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Why Choose Us Section -->
+
+    <!-- ======= Call To Action Section ======= 
+    <section id="call-to-action" class="call-to-action">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h3>Ut fugiat aliquam aut non</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+            <a class="cta-btn" href="#">Call To Action</a>
+          </div>
+        </div>
+
+      </div>
+    </section>--><!-- End Call To Action Section -->
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Nuestro Equipo</h2>
+
+        </div>
+
+        <div class="row gy-4">
+          {% for personas in equipo %}  
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="{{personas.imagen.url}}" class="img-fluid" alt="">                
+              </div>
+              <div class="member-info">
+                <h4>{{personas.nombre}} {{personas.apellido}}</h4>
+                <span>{{personas.cargo}}</span>
+              </div>
+            </div>
+          </div>{% endfor %}  <!-- End Team Member -->
+
+          
+
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
+  </main><!-- End #main -->
+{% endblock %}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Nova Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  {% load static %}
+  <!-- Favicons -->
+  <link href="{% static 'core/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'core/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'core/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'core/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'core/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'core/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'core/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'core/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'core/css/main1.css' %}" rel="stylesheet">
+</head>
+
+<body class="page-index">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="d-flex align-items-center">Nuestra Fundacion</h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{% url 'home' %}" class="active">Inicio</a></li>
+          <li><a href="{% url 'nosotras' %}">¿Quienes Somos?</a></li>
+          <li><a href="{% url 'noticias' %}">Noticias</a></li>
+          <li><a href="{% url 'actividades' %}">Actividades</a></li>
+          <li><a href="{% url 'eventos' %}">Eventos</a></li>
+          <li><a href="{% url 'cursos' %}">Cursos </a></li>
+          {%if not request.user.is_authenticated%}
+          <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+          <li><a href="{% url 'signup' %}">Registrarse</a></li>
+          {% else %}
+          <li style="color: rgba(255, 255, 255, 0.7);"><a href="#">Usuario: {{user.username}}</a></li>
+          <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+          {% endif %}
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <!-- contenido -->
+    {% block content %} {% endblock %}
+
+  <!-- Pié de página -->
+  <!-- ======= Hero Section ======= -->
+  
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-content">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-info">
+            <h2 class="logo d-flex align-items-center">
+              <span>EntreNosotras</span>
+            </h2>
+            <p>Siguenos en nuestras redes sociales para estar en contacto y enterarte de nuevas noticias y actividades que tenemos para vos.</p>
+            <div class="social-links d-flex  mt-3">
+              <a href="https://www.facebook.com/FundacionEntreNosotras" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="https://www.instagram.com/fundacion.entrenosotras/" class="instagram"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <h4>Direccion</h4>
+            <p>
+              José Ingenieros y Int. José Matín <br>
+              Villa Ángela,<br>
+              Argentina <br><br>
+              
+            </p>
+
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Contacto</h4>
+            <ul>
+              <strong>teléfono:</strong> +54 9 373546-4287<br>
+              <strong>Email:</strong> entrenosotras.org@gmail.com<br>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong><span>EntreNosotras</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nova-bootstrap-business-template/ -->
+          
+        </div>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'core/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'core/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'core/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'core/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'core/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'core/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'core/js/main.js' %}"></script>
+
+</body>
+
+</html>

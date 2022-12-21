@@ -1,0 +1,177 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Noticias{% endblock %}
+
+{% block content %}
+
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{% static 'core/img/chicas.jpg' %}')">
+    <div class="container position-relative d-flex flex-column align-items-center">
+
+      <h2>Categorias</h2>
+      <ol>
+        <li><a href="{% url 'home' %}">Inicio</a></li>
+        <li>Categorias</li>
+      </ol>
+
+    </div>
+  </div><!-- End Breadcrumbs -->
+
+  <!-- ======= Blog Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row g-5">
+
+        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="row gy-5 posts-list">
+            {% for noticia in categorias_post %}
+            <div class="col-lg-6">
+              <article class="d-flex flex-column">
+
+                <div class="post-img">
+                  <img src="{{noticia.imagen.url}}" alt="" class="img-fluid">
+                </div>
+
+                <h2 class="title">
+                  <a href="{% url 'noticia' noticia.id noticia.titulo|slugify %}">{{noticia.titulo}}</a>
+                </h2>
+
+                <div class="meta-top">
+                  <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'noticia' noticia.id noticia.titulo|slugify %}">{{noticia.author}}</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'noticia' noticia.id noticia.titulo|slugify %}"><time datetime="2022-01-01">{{noticia.fecha|date:"SHORT_DATE_FORMAT"}}</time></a></li>
+                  </ul>
+                </div>
+
+                <div class="content">
+                  <p>
+                    {{noticia.introduccion}}
+                  </p>
+                </div>
+
+                <div class="read-more mt-auto align-self-end">
+                  <a href="{% url 'noticia' noticia.id noticia.titulo|slugify %}">Ver más <i class="bi bi-arrow-right"></i></a>
+                </div>
+
+              </article>
+            </div><!-- End post list item -->
+            {% endfor %}
+
+           
+
+          </div><!-- End blog posts list -->
+
+          <div class="blog-pagination">
+            <ul class="justify-content-center">
+                  {% if page_obj.has_previous %}
+                      <li><a style ="border-radius:0%; width:80px; margin-left: 20px;" href="?page=1"> Inicio </a></li>
+                      <li><a style ="border-radius:0%; width:80px; margin-left: 20px;" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+                  {% endif %}
+                  {% if page_obj.has_next %}                      
+                      {% for paginas in page_obj.paginator.page_range %}
+                      <li><a href="?page={{ paginas }}">{{ paginas }}</a></li>
+                      {% endfor %}
+                      <li><a style ="border-radius:0%;  width:80px; margin-left: 20px;" href="?page={{ page_obj.next_page_number }}">Siguiente </a></li>
+                      <li><a style ="border-radius:0%;  width:80px; margin-left: 20px;" href="?page={{ page_obj.paginator.num_pages }}">Último</a></li>                 
+                  {% endif %}
+          </div> 
+        </div>
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+
+          <div class="sidebar ps-lg-4">
+            <div class="sidebar-item categories">
+                <h3 class="sidebar-title">Categorias</h3>
+                {% for categoria in categorias %}
+                <ul class="mt-3">
+                  <li><a href="{% url 'categorias' categoria.id %}">{{categoria.nombre}} <span></span></a></li>
+                </ul>
+                {% endfor %}
+            </div><!-- End sidebar categories-->
+                     
+
+            <div class="sidebar-item recent-posts">
+              <h3 class="sidebar-title">Post Recientes</h3>
+
+              <div class="mt-3">
+                {% for noticia in noti %}
+                {% if forloop.counter < 3 %}
+                <div class="post-item mt-3">
+                  <img src="{{noticia.imagen.url}}" alt="" class="flex-shrink-0">
+                  <div>
+                    <h4><a href="{% url 'noticia' noticia.id noticia.titulo|slugify %}">{{noticia.titulo}}</a></h4>
+                    <a href="{% url 'noticia' noticia.id noticia.titulo|slugify %}"><time datetime="2020-01-01">{{noticia.fecha}}</time></a>
+                  </div>
+                </div><!-- End recent post item-->
+                {% endif %} 
+                {% endfor %} 
+              </div>   
+            </div>       
+
+            
+
+          </div><!-- End Blog Sidebar -->
+
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Blog Section -->
+
+</main><!-- End #main -->
+
+{% endblock %}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- End #main
+
+  {% for noticia in noticias %}
+    <section class="page-section">
+      <div class="container">
+        <div class="product-item">
+          <div class="product-item-title d-flex">
+            <div class="bg-faded p-5 d-flex mr-auto rounded">
+              <h2 class="section-heading mb-0">
+                <span class="section-heading-upper">{{noticia.subtitulo}}</span>
+                <span class="section-heading-lower">{{noticia.titulo}}</span>
+              </h2>
+            </div>
+          </div>
+          <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{noticia.imagen.url}}" alt="">
+          <div class="product-item-description d-flex ml-auto">
+            <div class="bg-faded p-5 rounded">
+              <p class="mb-0">{{noticia.texto|linebreaks}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endfor %}

@@ -1,0 +1,142 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Noticias{% endblock %}
+
+{% block content %}
+
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{% static 'core/img/actividades.jpg' %}')">
+    <div class="container position-relative d-flex flex-column align-items-center">
+
+      <h2>Actividades</h2>
+      <ol>
+        <li><a href="{% url 'home' %}">Inicio</a></li>
+        <li>Actividades</li>
+      </ol>
+
+    </div>
+  </div><!-- End Breadcrumbs -->
+
+  <!-- ======= Blog Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+      
+
+        <div data-aos="fade-up" data-aos-delay="200">
+
+          <div class="row gy-5 posts-list">
+            {% for actividad in actividades %}
+            <div class="col-lg-6">
+              <article class="d-flex flex-column">
+
+                <div class="post-img">
+                  <img src="{{actividad.imagen.url}}" alt="" class="img-fluid">
+                </div>
+
+                <h2 class="title">
+                  <a href="{% url 'actividad' actividad.id actividad.titulo|slugify %}">{{actividad.titulo}}</a>
+                </h2>
+
+                <div class="meta-top">
+                  <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'actividad' actividad.id actividad.titulo|slugify %}">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'actividad' actividad.id actividad.titulo|slugify %}"><time datetime="2022-01-01">{{noticia.fecha}}</time></a></li>
+                  </ul>
+                </div>
+
+                <div class="content">
+                  <p>
+                    {{actividad.introduccion}}
+                  </p>
+                </div>
+
+                <div class="read-more mt-auto align-self-end">
+                  <a href="{% url 'actividad' actividad.id actividad.titulo|slugify %}">Ver más <i class="bi bi-arrow-right"></i></a>
+                </div>
+
+              </article>
+            </div><!-- End post list item -->
+            {% endfor %}
+
+           
+
+          </div><!-- End blog posts list -->
+
+          <div class="blog-pagination">
+            <ul class="justify-content-center">
+                  {% if page_obj.has_previous %}
+                      <li><a style ="border-radius:0%; width:80px; margin-left: 20px;" href="?page=1"> Inicio </a></li>
+                      <li><a style ="border-radius:0%; width:80px; margin-left: 20px;" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+                  {% endif %}
+                  {% if page_obj.has_next %}                      
+                      {% for paginas in page_obj.paginator.page_range %}
+                      <li><a href="?page={{ paginas }}">{{ paginas }}</a></li>
+                      {% endfor %}
+                      <li><a style ="border-radius:0%;  width:80px; margin-left: 20px;" href="?page={{ page_obj.next_page_number }}">Siguiente </a></li>
+                      <li><a style ="border-radius:0%;  width:80px; margin-left: 20px;" href="?page={{ page_obj.paginator.num_pages }}">Último</a></li>                 
+                  {% endif %}
+          </div> 
+
+        </div> 
+       </div>
+
+      
+
+    </div>
+  </section><!-- End Blog Section -->
+
+</main><!-- End #main -->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- End #main
+
+  {% for noticia in noticias %}
+    <section class="page-section">
+      <div class="container">
+        <div class="product-item">
+          <div class="product-item-title d-flex">
+            <div class="bg-faded p-5 d-flex mr-auto rounded">
+              <h2 class="section-heading mb-0">
+                <span class="section-heading-upper">{{noticia.subtitulo}}</span>
+                <span class="section-heading-lower">{{noticia.titulo}}</span>
+              </h2>
+            </div>
+          </div>
+          <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{noticia.imagen.url}}" alt="">
+          <div class="product-item-description d-flex ml-auto">
+            <div class="bg-faded p-5 rounded">
+              <p class="mb-0">{{noticia.texto|linebreaks}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endfor %}
