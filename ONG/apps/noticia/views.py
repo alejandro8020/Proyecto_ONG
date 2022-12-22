@@ -27,7 +27,7 @@ class ComentarioDetailView(CreateView):
         form.instance.author_id = self.request.user.id
         return super().form_valid(form)
 
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('noticias')
 
     
 
