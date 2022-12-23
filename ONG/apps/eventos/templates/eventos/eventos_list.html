@@ -44,7 +44,6 @@
 
                 <div class="meta-top">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'evento' evento.id evento.titulo|slugify %}"></a></li>
                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'evento' evento.id evento.titulo|slugify %}"><time datetime="2022-01-01">{{evento.fecha}}</time></a></li>
                   </ul>
                 </div>

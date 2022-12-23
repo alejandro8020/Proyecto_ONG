@@ -41,14 +41,6 @@
                 <h2 class="title">
                   <a href="{% url 'actividad' actividad.id actividad.titulo|slugify %}">{{actividad.titulo}}</a>
                 </h2>
-
-                <div class="meta-top">
-                  <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'actividad' actividad.id actividad.titulo|slugify %}">John Doe</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'actividad' actividad.id actividad.titulo|slugify %}"><time datetime="2022-01-01">{{noticia.fecha}}</time></a></li>
-                  </ul>
-                </div>
-
                 <div class="content">
                   <p>
                     {{actividad.introduccion}}
